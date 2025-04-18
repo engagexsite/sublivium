@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sublivium – Capítulo VIII: O Código Final</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #000;
+      color: #00ff00;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      overflow-y: auto;
+      animation: fadeInBackground 3s ease-out;
+    }
+
+    /* Animação de entrada do fundo */
+    @keyframes fadeInBackground {
+      0% { background-color: black; }
+      100% { background-color: #111; }
+    }
+
+    #screen {
+      width: 90%;
+      max-width: 800px;
+      height: 80%;
+      background-color: #111;
+      border: 2px solid #00ff00;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 30px #00ff00;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      animation: shake 0.5s ease-out infinite;
+    }
+
+    /* Efeito de tremor da tela */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(5px); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInText 1.5s ease-out;
+    }
+
+    /* Animação de fade-in do título */
+    @keyframes fadeInText {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      animation: fadeInText 2s ease-out;
+    }
+
+    .choice-btn {
+      background-color: #222;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      animation: fadeInButton 2s ease-out;
+    }
+
+    /* Animação de fade-in do botão */
+    @keyframes fadeInButton {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .choice-btn:hover {
+      background-color: #333;
+    }
+
+    .fade-in {
+      animation: fadeIn 3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .code-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      color: #00ff00;
+      font-size: 0.8rem;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      z-index: 0;
+      animation: scrollCode 20s infinite linear;
+    }
+
+    /* Efeito de scroll do código no fundo */
+    @keyframes scrollCode {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100%); }
+    }
+
+    .continue-btn {
+      background-color: #ff6600;
+      color: white;
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      border-radius: 12px;
+      margin-top: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .continue-btn:hover {
+      background-color: #ff3333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="code-background">
+    <div id="code"></div>
+  </div>
+
+  <div id="screen">
+    <h1 class="fade-in">Sublivium – Capítulo VIII: O Código Final</h1>
+    <p class="fade-in" id="narrativeText">Você finalmente percebeu a verdade. A tela diante de você começa a mostrar códigos, números e caracteres binários. O que parecia ser uma vida normal foi, na verdade, uma simulação controlada. Tudo, todos os sentimentos, escolhas, tudo... programado.</p>
+    <p class="fade-in" id="choiceText">Agora, você tem uma escolha final. Você pode tentar sair dessa simulação, mas será um caminho árduo. Ou pode escolher se render, aceitar a prisão digital que é sua "realidade".</p>
+    <div class="fade-in">
+      <button class="choice-btn" onclick="makeChoice()">Aceitar a simulação</button>
+    </div>
+  </div>
+
+  <div id="continue" style="display: none;">
+    <button class="continue-btn" onclick="location.href='end.html'">→ Finalizar e sair da simulação</button>
+  </div>
+
+  <script>
+    function makeChoice() {
+      const narrativeText = document.getElementById('narrativeText');
+      const choiceText = document.getElementById('choiceText');
+      const continueButton = document.getElementById('continue');
+
+      narrativeText.innerHTML = "Você aceita a simulação, sentindo o peso da decisão. A tela à sua frente começa a se distorcer ainda mais, e sua consciência se dissolve na correnteza de dados. Você se torna parte da programação.";
+      choiceText.innerHTML = "Você perdeu, e agora é apenas um código dentro de um sistema. Sem identidade. Sem propósito. A tela se apaga, e você desaparece, apenas mais um número perdido na rede.";
+      continueButton.style.display = 'block';
+    }
+
+    // Gerar código binário falso no fundo
+    const codeContainer = document.getElementById('code');
+    setInterval(() => {
+      const codeLine = '01010101 ' + Math.random().toString(2).padStart(8, '0');
+      codeContainer.innerHTML += codeLine + '<br>';
+      if (codeContainer.scrollHeight > codeContainer.clientHeight) {
+        codeContainer.scrollTop = codeContainer.scrollHeight;
+      }
+    }, 100);
+  </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Capítulo 3 – Ruptura</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Unbounded', cursive;
+      background: linear-gradient(to bottom, #0b0b0b, #1a0000);
+      color: #eee;
+      overflow-x: hidden;
+      position: relative;
+      transition: background 2s;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+      animation: fadeIn 2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff4444;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 1.3em;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .option {
+      background: rgba(255, 20, 20, 0.1);
+      border: 1px solid #aa0000;
+      padding: 14px 24px;
+      border-radius: 12px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .option:hover {
+      background: rgba(255, 20, 20, 0.2);
+      transform: scale(1.03);
+    }
+
+    .cuts-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .cut {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background-color: rgba(255, 0, 0, 0.3);
+      animation: bloodAnim 1.5s infinite alternate;
+    }
+
+    @keyframes bloodAnim {
+      from { transform: translateY(-20px); opacity: 0.2; }
+      to { transform: translateY(20px); opacity: 0.8; }
+    }
+
+    .continue-button {
+      background-color: #5a0000;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      color: white;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 15px red;
+      animation: pulse 1.5s infinite;
+      transition: transform 0.4s;
+    }
+
+    .continue-button:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px red; }
+      50% { box-shadow: 0 0 25px red; }
+      100% { box-shadow: 0 0 10px red; }
+    }
+
+    .glitch {
+      animation: glitch 0.2s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); filter: hue-rotate(0deg); }
+      20% { transform: translate(-2px, 2px); filter: hue-rotate(15deg); }
+      40% { transform: translate(2px, -2px); filter: hue-rotate(30deg); }
+      60% { transform: translate(-1px, 1px); filter: hue-rotate(0deg); }
+      80% { transform: translate(1px, -1px); filter: hue-rotate(-15deg); }
+      100% { transform: translate(0); filter: hue-rotate(0deg); }
+    }
+
+    footer {
+      text-align: center;
+      margin: 80px auto;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="story">
+  <h1>Capítulo III – Ruptura</h1>
+  <p>Aos 14 anos, Felipe já não era mais o mesmo. O olhar vazio, o silêncio constante, a sensação de que o mundo seguia enquanto ele ficava para trás. Em casa, o pai havia ido embora. A mãe passava dias inteiros deitada, como se estivesse esperando a vida passar. Felipe sentia-se invisível.</p>
+  <p>Na escola, as provocações aumentaram. Chamavam-no de estranho, de inútil. Ele ria por fora, mas por dentro, cada palavra virava um espinho. Começou a faltar. Começou a sumir. Começou a se esconder dele mesmo.</p>
+  <p>Foi numa praça vazia que conheceu Raul. Um garoto mais velho, confiante, com olhos que pareciam não temer nada. "Isso aqui vai te libertar", disse, mostrando um cigarro estranho.</p>
+
+  <div class="option" onclick="usarDroga()">Experimentar a substância</div>
+  <div class="option" onclick="recusarDroga()">Recusar e fugir</div>
+
+  <div id="nextPart" style="margin-top: 40px;"></div>
+</div>
+
+<div class="cuts-overlay" id="cuts"></div>
+
+<footer>© 2025 Sublivium Project – Todos os direitos reservados.</footer>
+
+<script>
+  function usarDroga() {
+    document.body.classList.add('glitch');
+    document.getElementById('story').innerHTML += `
+      <p style="color: #faa;">O efeito foi imediato. A mente de Felipe se desconectou do corpo. As luzes ao redor tremiam. Os sons pareciam vir debaixo da terra. Mas, por alguns segundos… ele se sentiu bem.</p>
+      <p style="color: #faa;">Nos dias seguintes, ele voltou. Queria mais. E mais. Cada vez, um pouco mais longe de si mesmo.</p>
+    `;
+
+    setTimeout(() => {
+      mostrarAutomutilacao();
+    }, 4000);
+  }
+
+  function recusarDroga() {
+    document.body.classList.remove('glitch');
+    document.body.style.background = "linear-gradient(to bottom, #111, #000)";
+    document.getElementById('story').innerHTML += `
+      <p>Felipe recuou. Correu até não sentir as pernas. Raul riu. "Covarde", gritou. Mas, naquela noite, Felipe dormiu sem culpa. Pela primeira vez em muito tempo, ele disse não.</p>
+      <button class="continue-button" onclick="irParaCapitulo4()">Continuar</button>
+    `;
+  }
+
+  function mostrarAutomutilacao() {
+    document.body.classList.remove('glitch');
+    document.body.style.background = "#220000";
+    document.getElementById('story').innerHTML += `
+      <p style="color: #f88;">Aos 15, Felipe estava viciado. Escondia pacotes no armário. Seus olhos estavam sempre vermelhos, seu coração vazio. Até que, num fim de tarde, com os pulsos tremendo e o peito explodindo, ele pegou a lâmina do apontador.</p>
+      <p style="color: #f88;">Não foi pela dor. Foi pelo alívio. O sangue saía e com ele, parecia sair um pouco do que doía.</p>
+    `;
+
+    const cuts = document.getElementById('cuts');
+    for (let i = 0; i < 20; i++) {
+      const cut = document.createElement('div');
+      cut.classList.add('cut');
+      cut.style.left = `${Math.random() * window.innerWidth}px`;
+      cut.style.top = `${Math.random() * window.innerHeight}px`;
+      cuts.appendChild(cut);
+    }
+
+    setTimeout(() => {
+      document.getElementById('story').innerHTML += `
+        <p style="color: #ccc;">Mas nada passou. A dor voltou. O vazio aumentou. E agora havia cicatrizes, e vergonha, e culpa. Ninguém via. Ninguém sabia.</p>
+        <p>Felipe queria gritar, mas não saía som. Queria ajuda, mas não sabia pedir. Queria parar… mas já não sabia como.</p>
+        <button class="continue-button" onclick="irParaCapitulo4()">Continuar</button>
+      `;
+    }, 5000);
+  }
+
+  function irParaCapitulo4() {
+    document.body.style.transition = "all 1.5s ease-in-out";
+    document.body.style.opacity = 0;
+    setTimeout(() => {
+      window.location.href = "chapter4.html";
+    }, 1500);
+  }
+</script>
+</body>
+</html>

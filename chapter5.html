@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Capítulo 5 – Fragmentos de Recuperação</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .text-block {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.5s ease-out forwards;
+      margin-bottom: 30px;
+      font-size: 1.3rem;
+      color: #ddd;
+    }
+
+    .text-block:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .text-block:nth-child(3) {
+      animation-delay: 2s;
+    }
+
+    .text-block:nth-child(4) {
+      animation-delay: 3s;
+    }
+
+    .text-block:nth-child(5) {
+      animation-delay: 4s;
+    }
+
+    .choice-container {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInChoices 1s ease-out 5s forwards;
+    }
+
+    .choice-button {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: #eee;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #555;
+    }
+
+    .choice-button:hover {
+      background-color: #333;
+      color: #ffc;
+    }
+
+    .continue-btn {
+      margin-top: 60px;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff3333;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.6s ease;
+      animation: fadeInBtn 2s ease 7s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInChoices {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInBtn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    .glitch {
+      animation: shake 0.3s infinite;
+      color: #ff4444;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="text-block">O tempo passou, mas as cicatrizes não desapareceram.</div>
+    <div class="text-block glitch">Felipe ainda sente o eco da lâmina na pele.</div>
+    <div class="text-block">A escola o ignora. A sociedade o culpa. A família se cala.</div>
+    <div class="text-block">Mas há uma escolha. A dor o moldou, mas não precisa defini-lo.</div>
+    <div class="text-block">Ele pode tentar se reconstruir… ou afundar de vez.</div>
+
+    <div class="choice-container">
+      <button class="choice-button" onclick="selectPath('reabilitar')">Buscar ajuda psicológica</button>
+      <button class="choice-button" onclick="selectPath('negar')">Negar tudo e fingir estar bem</button>
+      <button class="choice-button" onclick="selectPath('voltar')">Voltar às drogas</button>
+    </div>
+
+    <button class="continue-btn" onclick="location.href='chapter6.html'" id="continueBtn">→ Continuar</button>
+  </div>
+
+  <script>
+    function selectPath(choice) {
+      const btn = document.getElementById('continueBtn');
+
+      // Esconde os botões depois da escolha
+      document.querySelector('.choice-container').style.display = 'none';
+      
+      if (choice === 'voltar') {
+        alert("Felipe não resistiu... Ele se entregou completamente.");
+        btn.style.display = "none"; // Botão de continuar desaparece
+      } else if (choice === 'negar') {
+        alert("Ele continua mascarando a dor. Isso o corrói lentamente.");
+        btn.style.display = "block"; // Botão de continuar aparece
+      } else if (choice === 'reabilitar') {
+        alert("Felipe decide pedir ajuda. Um passo pequeno, mas vital.");
+        btn.style.display = "block"; // Botão de continuar aparece
+      }
+    }
+  </script>
+</body>
+</html>

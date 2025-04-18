@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 6 – Simulatio</title>
+  <style>
+    /* Reset básico */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #000;
+      color: #00FF00;
+      overflow: hidden;
+    }
+
+    /* Animações */
+    @keyframes glitchEffect {
+      0%   { text-shadow: 2px 0 red, -2px 0 blue; }
+      50%  { text-shadow: -2px 0 red, 2px 0 blue; }
+      100% { text-shadow: 2px 0 red, -2px 0 blue; }
+    }
+    @keyframes type {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    @keyframes fadeInText {
+      0%   { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%   { transform: scale(1);   box-shadow: 0 0 10px #ff0055; }
+      50%  { transform: scale(1.05); box-shadow: 0 0 20px #ff0055; }
+      100% { transform: scale(1);   box-shadow: 0 0 10px #ff0055; }
+    }
+
+    /* Classe para efeito “glitch” em texto específico */
+    .glitch {
+      display: inline-block;
+      animation: glitchEffect 2s infinite;
+    }
+
+    /* Tela de erro estilo “Windows XP” */
+    #boot {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      color: #ff0033;
+      z-index: 10;
+      text-align: center;
+      font-size: 1.5rem;
+      animation: glitchEffect 3s infinite;
+    }
+    #boot p {
+      white-space: nowrap;
+      font-size: 1.5rem;
+      display: inline-block;     /* necessário para animar a largura */
+      overflow: hidden;          /* esconde o texto “não digitado” */
+      animation:
+        type 3s steps(40) 1 forwards,
+        blink .5s step-end infinite alternate,
+        fadeInText 3s ease-in-out forwards;
+    }
+
+    /* Tela principal da história */
+    #main {
+      visibility: hidden;
+      opacity: 0;
+      color: #00FF00;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ff0055;
+      margin-bottom: 30px;
+      text-shadow: 0 0 5px #ff0055;
+      animation: fadeInText 3s ease-in-out forwards;
+    }
+    #main p {
+      margin: 10px 0;
+      animation: fadeInText 1.5s ease-in-out forwards;
+    }
+
+    /* Opções de escolha */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeInText 1.5s ease-in forwards;
+      animation-delay: 12s;
+    }
+    .btn {
+      padding: 12px 24px;
+      background: #111;
+      color: #00FF00;
+      border: 1px solid #00FF00;
+      cursor: pointer;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn:hover {
+      background: #00FF00;
+      color: #000;
+    }
+
+    /* Botão para continuar */
+    .continue {
+      margin-top: 30px;
+      display: none;
+      opacity: 0;
+      animation: fadeInText 2s ease-in-out forwards;
+      animation-delay: 14s;
+    }
+    .continue .btn {
+      background: #ff0055;
+      color: #fff;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tela de erro tipo "Windows XP" -->
+  <div id="boot">
+    <div>
+      <p>ERRO: FALHA NA CORREÇÃO DO MÓDULO...</p>
+      <p>REINICIANDO SUBSISTEMA...</p>
+      <p>ERRO: MEMÓRIA CORROMPIDA...</p>
+      <p>TENTANDO CORRIGIR O ERRO....................... ERRO</p>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <div id="main">
+    <h1>Capítulo VI – Simulatio</h1>
+    <p>"O que você viveu... nunca foi real."</p>
+    <p>Felipe acorda em uma sala branca, sem portas. Ecos metálicos atravessam sua mente. Uma voz o chama: <span class="glitch">SUJEITO 018-D – ATIVO</span>.</p>
+    <p>Imagens da infância, da dor, dos cortes, das drogas... tudo era simulado. Um experimento.</p>
+    <p>Você... era só um protótipo.</p>
+
+    <!-- Opções de escolha -->
+    <div class="options">
+      <button class="btn" onclick="choose('aceitar')">Aceitar a verdade</button>
+      <button class="btn" onclick="choose('negar')">Negar e fugir da simulação</button>
+      <button class="btn" onclick="choose('quebrar')">Tentar quebrar o sistema</button>
+    </div>
+
+    <!-- Botão para continuar -->
+    <div class="continue">
+      <button class="btn" onclick="location.href='chapter7.html'">Continuar →</button>
+    </div>
+  </div>
+
+  <script>
+    // Após 5 segundos, oculta tela de boot e revela o main
+    setTimeout(() => {
+      document.getElementById('boot').style.visibility = 'hidden';
+      const main = document.getElementById('main');
+      main.style.visibility = 'visible';
+      main.style.opacity = '1';
+    }, 5000);
+
+    function choose(opt) {
+      const main = document.getElementById('main');
+      const options = document.querySelector('.options');
+      const cont   = document.querySelector('.continue');
+      options.style.display = 'none';
+
+      let resultHTML = '';
+      if (opt === 'aceitar') {
+        resultHTML = `
+          <p style="animation-delay:0s;">Você fecha os olhos. Uma lágrima escorre, mas não há tristeza. Só aceitação.</p>
+          <p style="animation-delay:1s;">"Sou um dado... em um jogo que nunca pedi para jogar."</p>
+        `;
+        document.body.style.backgroundColor = '#111';
+      } else if (opt === 'negar') {
+        resultHTML = `
+          <p style="animation-delay:0s;">Felipe corre, grita, quebra as paredes falsas. Mas elas se recompõem.</p>
+          <p style="animation-delay:1s;">"Não! Isso não pode ser tudo!"</p>
+        `;
+        document.body.style.backgroundColor = '#200020';
+      } else if (opt === 'quebrar') {
+        resultHTML = `
+          <p style="animation-delay:0s;">Ele puxa fios invisíveis da própria mente. A simulação oscila. Gritos de códigos ecoam.</p>
+          <p style="animation-delay:1s;" class="glitch">SISTEMA EM COLAPSO – 018-D DESPERTO</p>
+        `;
+        document.body.style.backgroundColor = '#220000';
+      }
+
+      main.insertAdjacentHTML('beforeend', resultHTML);
+      setTimeout(() => {
+        cont.style.display = 'block';
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
+

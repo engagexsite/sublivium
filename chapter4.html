@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sublivium – Capítulo IV: Ruína ou Renascimento</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #0a0a0a 20%, #000 100%);
+      color: #eee;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      transition: background 2s ease;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #ff4444;
+      text-shadow: 0 0 15px #ff0000aa;
+      text-align: center;
+    }
+
+    .text-block {
+      opacity: 0;
+      font-size: 1.3rem;
+      margin: 20px 0;
+      max-width: 700px;
+      text-align: center;
+      color: #ddd;
+      transition: opacity 1.5s ease;
+    }
+
+    .text-block.show {
+      opacity: 1;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      gap: 20px;
+    }
+
+    .option-btn {
+      background-color: #111;
+      border: 2px solid #333;
+      padding: 15px 30px;
+      border-radius: 10px;
+      color: #eee;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+
+    .option-btn:hover {
+      background-color: #222;
+      transform: scale(1.05);
+    }
+
+    .death-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: red;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 2s ease;
+    }
+
+    .death-screen.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .continue-btn {
+      margin-top: 60px;
+      padding: 18px 50px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(90deg, #222, #555);
+      color: #fff;
+      box-shadow: 0 0 15px #888;
+      animation: pulse 1.5s infinite;
+      transition: 0.4s ease;
+    }
+
+    .continue-btn:hover {
+      background: linear-gradient(90deg, #444, #777);
+      box-shadow: 0 0 25px #aaa;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Capítulo IV: Ruína ou Renascimento</h1>
+
+  <div class="text-block">Felipe trocou um vício por outro. Quando parou com as substâncias, mergulhou nos jogos, nas redes, nos likes.</div>
+  <div class="text-block">Dormia com o telefone no rosto. Acordava já dentro de um mundo digital onde tudo parecia mais fácil. Mais seguro.</div>
+  <div class="text-block">Passava dias trancado, sem comer, sem falar. Só scrollando. Vendo vidas perfeitas. Sentindo-se cada vez mais imperfeito.</div>
+  <div class="text-block">Começou a apostar. Pequenas quantias, depois tudo. Tudo por uma sensação. Por um escape. Por algo.</div>
+  <div class="text-block">"Você não vive, só consome", disse a mãe. Mas ele nem ouviu. Tinha fones nos ouvidos. E ruído na cabeça.</div>
+  <div class="text-block">Um dia, sentiu que algo nele ainda queria mudar. Mas será que conseguiria?</div>
+
+  <div class="button-group">
+    <button class="option-btn" onclick="choose('vicio')">Afundar-se ainda mais no vício digital</button>
+    <button class="option-btn" onclick="choose('mudanca')">Encarar a realidade e buscar ajuda</button>
+  </div>
+
+  <div id="deathScreen" class="death-screen">
+    <div>Você perdeu a si mesmo. O mundo digital venceu.</div>
+  </div>
+
+  <script>
+    const textBlocks = document.querySelectorAll('.text-block');
+    let index = 0;
+
+    function revealText() {
+      if (index < textBlocks.length) {
+        textBlocks[index].classList.add('show');
+        index++;
+        setTimeout(revealText, 2500);
+      }
+    }
+
+    window.onload = () => {
+      setTimeout(revealText, 1000);
+    };
+
+    function choose(path) {
+      if (path === 'vicio') {
+        document.body.style.background = "#220000";
+        document.getElementById('deathScreen').classList.add('show');
+      } else if (path === 'mudanca') {
+        const btn = document.createElement('button');
+        btn.textContent = '→ Continuar para o Capítulo V';
+        btn.className = 'continue-btn';
+        btn.onclick = () => {
+          window.location.href = 'chapter5.html';
+        };
+        document.body.appendChild(btn);
+      }
+    }
+  </script>
+</body>
+</html>
